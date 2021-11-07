@@ -15,14 +15,14 @@ import java.util.TreeMap;
  */
 public class RomanNumberHandler implements NumberHandler {
     private final Map<String, Integer> romanNumbs;
-    private final TreeMap<Integer, String> numbs;
+    private final TreeMap<Integer, String> arabicNumbs;
     private final NumberSystem system = NumberSystem.ROMAN;
 
     public RomanNumberHandler() {
         romanNumbs = new HashMap<>();
-        numbs = new TreeMap<>();
+        arabicNumbs = new TreeMap<>();
         initRomanNumbers();
-        initNumbers();
+        initArabicNumbers();
     }
 
     @Override
@@ -32,11 +32,11 @@ public class RomanNumberHandler implements NumberHandler {
 
     @Override
     public String getNumberInNumberSystem(Integer number) throws NumberSystemException {
-        int found = numbs.floorKey(number);
+        int found = arabicNumbs.floorKey(number);
         if (number == found) {
-            return numbs.get(number);
+            return arabicNumbs.get(number);
         }
-        return numbs.get(found) + getNumberInNumberSystem(number - found);
+        return arabicNumbs.get(found) + getNumberInNumberSystem(number - found);
     }
 
     @Override
@@ -57,16 +57,16 @@ public class RomanNumberHandler implements NumberHandler {
         romanNumbs.put("X", 10);
     }
 
-    private void initNumbers() {
-        numbs.put(100, "C");
-        numbs.put(90, "XC");
-        numbs.put(50, "L");
-        numbs.put(40, "XL");
-        numbs.put(10, "X");
-        numbs.put(9, "IX");
-        numbs.put(5, "V");
-        numbs.put(4, "IV");
-        numbs.put(1, "I");
+    private void initArabicNumbers() {
+        arabicNumbs.put(100, "C");
+        arabicNumbs.put(90, "XC");
+        arabicNumbs.put(50, "L");
+        arabicNumbs.put(40, "XL");
+        arabicNumbs.put(10, "X");
+        arabicNumbs.put(9, "IX");
+        arabicNumbs.put(5, "V");
+        arabicNumbs.put(4, "IV");
+        arabicNumbs.put(1, "I");
     }
 
 }

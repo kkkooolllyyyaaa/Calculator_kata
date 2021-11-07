@@ -10,7 +10,7 @@ public class Expression {
     private final Operator operator;
     private final Integer second;
     private Integer result;
-    private NumberSystem system = NumberSystem.DECIMAL;
+    private NumberSystem system = NumberSystem.ARABIC;
 
     public Expression(Integer first, Operator operator, Integer second) {
         this.first = first;

@@ -20,7 +20,7 @@ public class ExpressionPrinterImpl implements ExpressionPrinter {
     @Override
     public void print(Expression expression) {
         if (isValidResult(expression.getResult())) {
-            if (expression.getSystem().equals(NumberSystem.DECIMAL)) {
+            if (expression.getSystem().equals(NumberSystem.ARABIC)) {
                 System.out.println(expression);
             } else if (expression.getSystem().equals(NumberSystem.ROMAN)) {
                 System.out.println(handler.getNumberInNumberSystem(expression.getFirst()) +

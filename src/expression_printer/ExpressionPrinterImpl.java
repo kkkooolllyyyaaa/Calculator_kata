@@ -19,7 +19,7 @@ public class ExpressionPrinterImpl implements ExpressionPrinter {
 
     @Override
     public void print(Expression expression) {
-        if (isValidResult(expression.getResult())) {
+        if (isValidResult(expression)) {
             if (expression.getSystem().equals(NumberSystem.ARABIC)) {
                 System.out.println(expression);
             } else if (expression.getSystem().equals(NumberSystem.ROMAN)) {
@@ -36,7 +36,13 @@ public class ExpressionPrinterImpl implements ExpressionPrinter {
         }
     }
 
-    private boolean isValidResult(Integer res) {
-        return res != null && res >= 0;
+    private boolean isValidResult(Expression expression) {
+        if (expression.getResult() != null) {
+            if (expression.getSystem().equals(NumberSystem.ROMAN)) {
+                return expression.getResult() >= 0;
+            } else
+                return true;
+        } else
+            return false;
     }
 }

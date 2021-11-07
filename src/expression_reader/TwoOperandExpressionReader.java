@@ -68,7 +68,7 @@ public class TwoOperandExpressionReader implements ExpressionReader {
 
 
     private ArrayList<String> getOperands() throws IOException {
-        String input = reader.readLine().trim();
+        String input = reader.readLine().trim().toUpperCase();
         String operator = "";
         int index = -1;
         for (int i = 0; i < input.length(); ++i) {
@@ -93,7 +93,8 @@ public class TwoOperandExpressionReader implements ExpressionReader {
     private void expressionFitsRangeCheck(Expression expression) throws RangeOfAcceptableException {
         Integer first = expression.getFirst();
         Integer second = expression.getSecond();
-        if (first < 0 || first > 10 || second < 0 || second > 10) {
+        if (first <= 0 || first > 10
+                || second <= 0 || second > 10) {
             throw new RangeOfAcceptableException();
         }
     }

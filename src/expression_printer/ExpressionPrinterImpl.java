@@ -39,7 +39,7 @@ public class ExpressionPrinterImpl implements ExpressionPrinter {
     private boolean isValidResult(Expression expression) {
         if (expression.getResult() != null) {
             if (expression.getSystem().equals(NumberSystem.ROMAN)) {
-                return expression.getResult() >= 0;
+                return expression.getResult() > 0;
             } else
                 return true;
         } else

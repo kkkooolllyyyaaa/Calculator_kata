@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 /**
  * @author tsypk on 07.11.2021 16:39
@@ -53,7 +54,7 @@ public class TwoOperandExpressionReader implements ExpressionReader {
             Expression expression = new Expression(first, operator, second);
             expressionFitsRangeCheck(expression);
             return expression;
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException romanOrIncorrect) {
             Integer first = handler.handleNumber(operands.get(1));
             Integer second = handler.handleNumber(operands.get(2));
             if (first != null && second != null) {
@@ -69,25 +70,43 @@ public class TwoOperandExpressionReader implements ExpressionReader {
 
     private ArrayList<String> getOperands() throws IOException {
         String input = reader.readLine().trim().toUpperCase();
-        String operator = "";
-        int index = -1;
+        Pattern arabicPattern = Pattern.compile("^([0-9]+)(\\s)*[+/*-](\\s)*([0-9]+)$");
+        boolean is_arabic = arabicPattern.matcher(input).find();
+
+        Pattern romanPattern = Pattern.compile("^([VXI]+)(\\s)*[+/*\\-](\\s)*([VXI]+)$");
+        boolean is_roman = romanPattern.matcher(input).find();
+
+        if (is_arabic || is_roman) {
+            return getOperandsList(input);
+        } else {
+            throw new ExpressionFormatException("Incorrect format of the expression");
+        }
+    }
+
+    private ArrayList<String> getOperandsList(String input) {
+        ArrayList<String> operands = new ArrayList<>();
+        int index = getOperationIndex(input);
+        operands.add("" + input.charAt(index));
+        operands.add(input.substring(0, index).trim());
+        operands.add(input.substring(index + 1).trim());
+        return operands;
+    }
+
+    /**
+     * Caller saved function
+     * Caller have to check regex pattern before calling
+     * Requires operator existence
+     * @param input input string with operator
+     * @return index of the operator
+     */
+    private Integer getOperationIndex(String input) {
         for (int i = 0; i < input.length(); ++i) {
-            String oper = "" + input.charAt(i);
-            if (Operator.getOperatorByString(oper) != null) {
-                operator = oper;
-                index = i;
-                break;
+            String operator = "" + input.charAt(i);
+            if (Operator.getOperatorByString(operator) != null) {
+                return i;
             }
         }
-        ArrayList<String> operands = new ArrayList<>();
-        if (index != -1) {
-            operands.add(operator.trim());
-            operands.add(input.substring(0, index).trim());
-            operands.add(input.substring(index + 1).trim());
-        } else {
-            throw new ExpressionFormatException("Operator isn't found");
-        }
-        return operands;
+        throw new RuntimeException("Unexpected error");
     }
 
     private void expressionFitsRangeCheck(Expression expression) throws RangeOfAcceptableException {

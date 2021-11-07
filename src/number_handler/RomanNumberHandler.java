@@ -58,15 +58,14 @@ public class RomanNumberHandler implements NumberHandler {
     }
 
     private void initArabicNumbers() {
-        arabicNumbs.put(100, "C");
-        arabicNumbs.put(90, "XC");
-        arabicNumbs.put(50, "L");
-        arabicNumbs.put(40, "XL");
-        arabicNumbs.put(10, "X");
-        arabicNumbs.put(9, "IX");
-        arabicNumbs.put(5, "V");
-        arabicNumbs.put(4, "IV");
         arabicNumbs.put(1, "I");
+        arabicNumbs.put(4, "IV");
+        arabicNumbs.put(5, "V");
+        arabicNumbs.put(9, "IX");
+        arabicNumbs.put(10, "X");
+        arabicNumbs.put(40, "XL");
+        arabicNumbs.put(50, "L");
+        arabicNumbs.put(90, "XC");
+        arabicNumbs.put(100, "C");
     }
-
 }

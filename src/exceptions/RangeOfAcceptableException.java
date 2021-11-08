@@ -7,7 +7,7 @@ package exceptions;
  */
 public class RangeOfAcceptableException extends RuntimeException {
     public RangeOfAcceptableException() {
-        super("Number don't fit range of acceptable");
+        super("Number don't fit range of acceptable: [1; 10]");
     }
 
 }

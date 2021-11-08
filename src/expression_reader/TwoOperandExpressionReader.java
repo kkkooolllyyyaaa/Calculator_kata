@@ -28,8 +28,7 @@ public class TwoOperandExpressionReader implements ExpressionReader {
     }
 
     /**
-     * Reads expression from standard input stream
-     *
+     * Main method, that reads expression from standard input stream
      * @return Expression instance
      */
     @Override
@@ -96,6 +95,7 @@ public class TwoOperandExpressionReader implements ExpressionReader {
      * Caller saved function
      * Caller have to check regex pattern before calling
      * Requires operator existence
+     *
      * @param input input string with operator
      * @return index of the operator
      */

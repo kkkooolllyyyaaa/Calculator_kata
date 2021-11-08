@@ -1,2 +1,2 @@
 # Calculator_kata
-Simple calculator that read decimal Roman integet numbers
+Simple calculator that read roman numbers
